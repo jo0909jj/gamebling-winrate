@@ -1,0 +1,35 @@
+import random
+
+def simulate_gambling(win_probability, num_rounds, target_amount, reinvestment_percentage, bankruptcy_threshold):
+    wins = 0
+    bankruptcies = 0
+
+    for _ in range(num_rounds):
+        amount = 100000  # 初始本金
+        while amount < target_amount and amount > bankruptcy_threshold:
+            if random.random() < win_probability:
+                win_amount = amount * reinvestment_percentage  # 贏錢繼續投入
+                amount += win_amount
+            else:
+                amount = 0  # 输光本金
+                bankruptcies += 1
+                break
+
+        if amount >= target_amount:
+            wins += 1
+
+    win_rate = wins / num_rounds
+    bankruptcy_rate = bankruptcies / num_rounds
+
+    return win_rate, bankruptcy_rate
+
+# 範例
+win_probability = 0.4586  # 勝率%
+num_rounds = 10000  # 進行幾次賭博
+target_amount = 15000000  # 目標金額為15000000
+reinvestment_percentage = 1
+bankruptcy_threshold = 1000  # 多少錢會破產
+
+win_rate, bankruptcy_rate = simulate_gambling(win_probability, num_rounds, target_amount, reinvestment_percentage, bankruptcy_threshold)
+print(f"Win rate: {win_rate:.2%}")
+print(f"Bankruptcy rate: {bankruptcy_rate:.2%}")
