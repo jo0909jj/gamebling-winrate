@@ -11,7 +11,7 @@ def simulate_gambling(win_probability, num_rounds, target_amount, reinvestment_p
                 win_amount = amount * reinvestment_percentage  # 贏錢繼續投入
                 amount += win_amount
             else:
-                amount = 0  # 输光本金
+                amount = 0  # 輸光本金
                 bankruptcies += 1
                 break
 
